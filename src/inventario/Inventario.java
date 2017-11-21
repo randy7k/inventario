@@ -3,7 +3,9 @@ package inventario;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +23,22 @@ public class Inventario {
             conn = DriverManager.getConnection(databaseURL);
             if (conn != null) {
                 System.out.println("Connected to the database");
+                
+                String selectTableSQL = "select nombre from medico where idmedico = 4 limit 1";
+                Statement statement = conn.createStatement();
+                ResultSet rs = statement.executeQuery(selectTableSQL); 
+                
+                if (rs.next()) {
+                    String username = rs.getString("nombre");
+                    System.out.println(username);
+                }else{
+                    System.out.println("rs is empty");
+                }
+                
+//                String username = rs.getString("nombre");
+//                System.out.println(username);
+                
+
             }
         } catch (SQLException ex) {
             
